@@ -6,8 +6,6 @@
 
 
 
-
-
 <h1>genealogy tree ( family tree ) </h1>
 
 
@@ -47,43 +45,44 @@
 <div class="tf-tree">
     <ul>
         <li>
-            <span class="tf-nc">
-
-                <div class="ui card">
-
-                    <div class="content">
-
-                        <div class="right floated meta">
-                            @if($item->gender == 'Male')
-                            <i class="right large blue inverted circular mars icon"></i>
-                            @else
-                            <i class="right large red inverted circular  venus icon"></i>
-                            @endif
 
 
-                        </div>
+            <div class="tf-nc ui card" style="display: inline-block;
+            transform: rotateX(180deg);">
 
-                        <a class="header">{{$item->name}}</a>
+                <div class="content">
+
+                    <div class="right floated meta">
+                        @if($item->gender == 'Male')
+                        <i class="right large blue inverted circular mars icon"></i>
+                        @else
+                        <i class="right large red inverted circular  venus icon"></i>
+                        @endif
+
 
                     </div>
-                    <div class="content">
-                        <div class="description">
+
+                    <a class="header">{{$item->name}}</a>
+
+                </div>
+                <div class="content">
+                    <div class="description">
 
 
 
-                            <i class="birthday cake icon"></i>
-                            <span class="date">born: {{$item->birth->format('d.m.Y')}}</span>
+                        <i class="birthday cake icon"></i>
+                        <span class="date">born: {{$item->birth->format('d.m.Y')}}</span>
 
 
-                        </div>
-                        <div class="description">
-                            age: {{$item->birth->diffInYears(now())}}
-                        </div>
                     </div>
+                    <div class="description">
+                        age: {{$item->birth->diffInYears(now())}}
+                    </div>
+                </div>
 
-                    @if($item->childrenRecursive()->count() < 2) <div class="action" style="display: flex;
+                @if($item->childrenRecursive()->count() < 2) <div class="action" style="display: flex;
                 justify-content: center;">
-                        <button class="circular ui button" onclick="$('#add').modal('show'); $('#add_calendar').calendar({ type: 'date', firstDayOfWeek: 1, formatter: {
+                    <button class="circular ui button" onclick="$('#add').modal('show'); $('#add_calendar').calendar({ type: 'date', firstDayOfWeek: 1, formatter: {
                         date: function (date, settings) {
                         if (!date) return ;
                         var day = date.getDate();
@@ -100,12 +99,12 @@
                         return year + '-' + month + '-' + day;
                         },
                     }}); $('.selection.dropdown').dropdown();"
-                            style="display:flex; justify-self: center; align-self:center; justify-content:center">
-                            <i class="icon add"></i> Add Parent
-                        </button>
+                        style="display:flex; justify-self: center; align-self:center; justify-content:center">
+                        <i class="icon add"></i> Add Parent
+                    </button>
 
-                </div>
-                @endif
+            </div>
+            @endif
 </div>
 
 
@@ -172,7 +171,6 @@
 
 
 
-</span>
 <ul>
     @foreach($item->children as $item)
 

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.7.8/semantic.min.css"
         integrity="sha256-pquaucmYjfUqK251HC4uCXIKb2TQ4brXeUN2STYrJeg=" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.7.8/semantic.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/treeflex/dist/css/treeflex.css">
+    <link rel="stylesheet" href="/css/tree.css">
 </head>
 
 <body>
