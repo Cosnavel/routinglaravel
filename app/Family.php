@@ -9,28 +9,20 @@ class Family extends Model
     //
     protected $fillable = ['name', 'birth', 'death', 'gender', 'parent'];
 
-    protected $dates = [
-        'birth', 'death'
-    ];
+    protected $dates = ['birth', 'death'];
 
 
 
-
-
-    public function children()
+    public function child()
     {
-        return $this->hasMany('App\Family', 'parent')->limit(2);
+        return $this->hasMany('App\Family', 'parent');
     }
-    public function childrenRecursive()
+    public function childRecursive()
     {
-        return $this->children()->with('childrenRecursive');
+        return $this->child()->with('childRecursive')->withChildCount();
     }
-    public function parent()
+    public function scopeWithChildCount($query)
     {
-        return $this->belongsTo('App\Family', 'parent');
-    }
-    public function parentRecursive()
-    {
-        return $this->parent()->with('parentRecursive');
+        return $query->withCount('child');
     }
 }

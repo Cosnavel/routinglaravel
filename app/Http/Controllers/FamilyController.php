@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Family;
 use Illuminate\Http\Request;
 use App\Http\Requests\FamilyRequest;
-
+use Illuminate\Support\Facades\DB;
 
 class FamilyController extends Controller
 {
@@ -16,79 +16,30 @@ class FamilyController extends Controller
      */
     public function index()
     {
-        //
-        $tree = Family::with('childrenRecursive')->get();
+        $item = Family::whereNull('parent')->withChildCount()->with('childRecursive')->first();
 
-
-        return view('family.index', compact('tree'));
+        return view('tree.index', compact('item'));
     }
 
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(FamilyRequest $request)
     {
-        //
-        $family = new Family;
-        $family->name = $request->name;
-        $family->birth = $request->date;
-        $family->gender = $request->gender;
+        Family::create($request->all());
 
-        $family->save();
-
-        return redirect('family')->withStatus(__('erfolgreich hinzugefügt'));
-
-        //ddd($family);
+        return redirect('/')->withStatus(__('erfolgreich hinzugefügt'));
     }
+
 
     public function parent(FamilyRequest $request, Family $item)
     {
+        $item->child()->create($request->all());
 
-
-        $item->children()->create($request->all());
-
-        return redirect('family')->withStatus(__('erfolgreich hinzugefügt'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Family  $family
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Family $family)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Family  $family
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Family $family)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Family  $family
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Family $family)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Family  $family
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Family $family)
-    {
-        //
+        return redirect('/')->withStatus(__('erfolgreich hinzugefügt'));
     }
 }

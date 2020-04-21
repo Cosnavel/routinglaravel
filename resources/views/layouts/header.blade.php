@@ -1,4 +1,4 @@
 <div class="ui secondary menu">
-    <a class="item">Blade Template</a>
+    <a class="item">Family Tree</a>
 </div>
 <div class="ui divider"></div>

@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class FamilyRequest extends FormRequest
 {
@@ -12,6 +11,7 @@ class FamilyRequest extends FormRequest
      *
      * @return bool
      */
+
     public function authorize()
     {
         return true;
@@ -26,9 +26,10 @@ class FamilyRequest extends FormRequest
     {
         return [
             //
-            'death' => 'nullable|sometimes|after:birth',
             'name' => 'required',
-            'gender' => 'required',
+            'birth' => 'required',
+            'death' => 'nullable|sometimes|after:birth',
+            'gender' => 'required'
         ];
     }
 }
