@@ -1,69 +1,77 @@
 # routinglaravel
+
 repo for laravel course
 
+1.  Model erstellen
 
- 1. Model erstellen 
+```php
+php artisan make:model Family -crm
+```
 
-            php artisan make:model Family -crm
-          
- 2. Migration befüllen 
+2.  Migration befüllen
 
-            Schema::create('families', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->date('birth');
-            $table->date('death')->nullable();
-            $table->string('gender');
-            $table->integer('parent')->nullable();
-            $table->timestamps();
-        });
-          
- 3. Migrieren – beachte, dass du dich in der Vagrant Box befindest.
- 4. Model ausfüllen – Mass Assignment, Datumsspalten 
+```php
+Schema::create('families', function (Blueprint $table) {
+    $table->bigIncrements('id');
+    $table->string('name');
+    $table->date('birth');
+    $table->date('death')->nullable();
+    $table->string('gender');
+    $table->integer('parent')->nullable();
+    $table->timestamps();
+});
+```
 
-            protected $fillable = ['name', 'birth', 'death', 'gender', 'parent'];
+3.  Migrieren – beachte, dass du dich in der Vagrant Box befindest.
+4.  Model ausfüllen – Mass Assignment, Datumsspalten
 
-    protected $dates = ['birth', 'death'];
-          
+```php
+protected $fillable = ['name', 'birth', 'death', 'gender', 'parent'];
+
+protected $dates = ['birth', 'death'];
+```
+
 5. Beziehungen definieren
 
-            public function child()
-    {
-        return $this->hasMany('App\Family', 'parent')->limit(2);
-    }
-    public function childRecursive()
-    {
-        return $this->child()->with('childRecursive');
-    }
+```php
+public function child()
+{
+    return $this->hasMany('App\Family', 'parent')->limit(2);
+}
+public function childRecursive()
+{
+    return $this->child()->with('childRecursive');
+}
+```
 
-          
- 6. Request erstellen und Validierung hinzufügen 
+6.  Request erstellen und Validierung hinzufügen
 
-            public function authorize()
-    {
-        return true;
-    }
+```php
+public function authorize()
+{
+    return true;
+}
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            //
-            'name' => 'required',
-            'birth' => 'required',
-            'death' => 'nullable|sometimes|after:birth',
-            'gender' => 'required'
-        ];
-    }
+/**
+    * Get the validation rules that apply to the request.
+    *
+    * @return array
+    */
+public function rules()
+{
+    return [
+        //
+        'name' => 'required',
+        'birth' => 'required',
+        'death' => 'nullable|sometimes|after:birth',
+        'gender' => 'required'
+    ];
+}
+```
 
-          
- 7. Controller und Methoden hinzufügen 
+7.  Controller und Methoden hinzufügen
 
-
+```php
 namespace App\Http\Controllers;
 
 use App\Family;
@@ -106,28 +114,40 @@ class FamilyController extends Controller
         return redirect('/')->withStatus(__('erfolgreich hinzugefügt'));
     }
 }
-          
- 8. Routes definieren 
+```
 
-            Route::put('/parent/{item}', 'FamilyController@parent')->name('parent');
+8.  Routes definieren
+
+```php
+Route::put('/parent/{item}', 'FamilyController@parent')->name('parent');
 Route::resource('/', 'FamilyController');
+```
 
-          
- 9. CSS-Dateien im App Layout einfügen – tree.css zuvor in den Ordner public/css/ kopieren 
- <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+9.  CSS-Dateien im App Layout einfügen – _tree.css_ zuvor in den Ordner _public/css/_ kopieren
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.7.8/semantic.min.css"
-        integrity="sha256-pquaucmYjfUqK251HC4uCXIKb2TQ4brXeUN2STYrJeg=" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.7.8/semantic.min.js"></script>
+```html
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"
+></script>
 
-    <link rel="stylesheet" href="/css/tree.css">
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.7.8/semantic.min.css"
+  integrity="sha256-pquaucmYjfUqK251HC4uCXIKb2TQ4brXeUN2STYrJeg="
+  crossorigin="anonymous"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.7.8/semantic.min.js"></script>
 
-          
- 10. Views schreiben – du kannst auch eigene Views für die Formulare erstellen anstatt von Modals 
+<link rel="stylesheet" href="/css/tree.css" />
+```
 
-            //index
-            @extends('layouts.app')
+10. Views schreiben – du kannst auch eigene Views für die Formulare erstellen anstatt von Modals
+
+```php
+//index
+@extends('layouts.app')
 
 @section('content')
 
@@ -151,10 +171,6 @@ Route::resource('/', 'FamilyController');
     </div>
 </div>
 @endif
-
-
-
-
 
 @if ($tree->isNotEmpty())
 
@@ -262,38 +278,20 @@ Route::resource('/', 'FamilyController');
                     </div>
                 </div>
             </div>
-
-
             <button class="ui button" type="submit">Submit</button>
         </form>
-
-
     </div>
-
 </div>
-
-
-
-
 <ul>
-
     @foreach($item->child as $item)
     @include('tree.child', $item)
     @endforeach
 </ul>
-
-
-
 </li>
 </ul>
-
 </div>
-
 @endif
-
-
 @endforeach
-
 @else
 <button class="circular ui icon button" onclick="$('.ui.modal').modal('show'); $('#standard_calendar').calendar({ type: 'date', firstDayOfWeek: 1, formatter: {
     date: function(date,settings) {
@@ -355,9 +353,10 @@ Route::resource('/', 'FamilyController');
 @endif
 
 @endsection
-          
+```
 
-            //child
+```php
+//child.blade.php
 <li>
     <div class="tree-child">
         <div class="ui card">
@@ -368,34 +367,25 @@ Route::resource('/', 'FamilyController');
                     @else
                     <i class="right large red inverted circular venus icon"></i>
                     @endif
-
                 </div>
-
                 <a class="header">{{$item->name}}</a>
-
             </div>
             <div class="content">
-
                 <div class="description">
                     <i class="birthday cake icon"></i>
                     <span class="date">born: {{$item->birth->format('d.m.Y')}}</span>
-
                 </div>
                 <div class="description">
                     <i class="hospital icon"></i>
                     <span class="date">death: @isset($item->death) {{$item->death->format('d.m.Y')}} @endisset</span>
-
                 </div>
                 <div class="description">
                     <span class="date">current age: @if(isset($item->death))
                         {{$item->birth->diffInYears($item->death)}}
                         @else {{$item->birth->diffInYears(now())}} @endif
-
                     </span>
-
                 </div>
             </div>
-
             @if($item->childRecursive()->count() < 2) <div class="action" style="display: flex; justify-content:center">
                 <button class="circular ui button" onclick="$('{{'#addparent'.$item->id}}').modal('show'); $('{{'#addparent_calendar'.$item->id}}').calendar({ type: 'date', firstDayOfWeek: 1, formatter: {
                             date: function(date,settings) {
@@ -418,14 +408,10 @@ Route::resource('/', 'FamilyController');
                 </button>
         </div>
         @endif
-
     </div>
-
     </div>
-
     <div class="ui modal" id="{{'addparent'.$item->id}}">
         <i class="close icon"></i>
-
         <div class="content">
             <div class="description">
                 <div class="ui header">add parent</div>
@@ -433,7 +419,6 @@ Route::resource('/', 'FamilyController');
             <form class="ui form" method="POST" action="{{route('parent', $item)}}" autocomplete="off">
                 @csrf
                 @method('PUT')
-
                 <div class="field">
                     <label>Name</label>
                     <input type="text" name="name" placeholder="name" required>
@@ -445,7 +430,6 @@ Route::resource('/', 'FamilyController');
                         <input type="text" placeholder="Date/Time" name="birth" required>
                     </div>
                 </div>
-
                 <div class="ui calendar" id="{{'death_calendar'.$item->id}}">
                     <label>death</label>
                     <div class="ui input left icon">
@@ -453,7 +437,6 @@ Route::resource('/', 'FamilyController');
                         <input type="text" placeholder="Date/Time" name="death">
                     </div>
                 </div>
-
                 <div class="field">
                     <label>gender</label>
                     <div class="ui selection dropdown" id="{{'selection_child'.$item->id}}">
@@ -466,25 +449,14 @@ Route::resource('/', 'FamilyController');
                         </div>
                     </div>
                 </div>
-
-
                 <button class="ui button" type="submit">Submit</button>
             </form>
-
-
         </div>
-
     </div>
-
     <ul>
         @foreach($item->child as $item)
         @include('tree.child', $item)
-
         @endforeach
     </ul>
-
-
-
-
 </li>
-      
+```
