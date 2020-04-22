@@ -6,11 +6,11 @@
 <a href="https://www.codefactor.io/repository/github/cosnavel/routinglaravel"><img src="https://www.codefactor.io/repository/github/cosnavel/routinglaravel/badge" alt="CodeFactor" /></a>
 </p>
 <p align="center">
-Übung Familienstammbaum - Webmaster Akademie Class "Einstieg in Laravel 7"
+Übung Familienstammbaum - Class "Einstieg in Laravel 7"
 </p>
 
 ## About the familytree
-Als große Übung der Webmaster Akademie Class "Einstieg in Laravel 7" hast du einen Familienstammbaum mit Laravel umgesetzt. In diesem Verzeichnis findest du den gesamten Code meiner Musterlösung. Ein Stammbaum stellt eine Schwierigkeit dar, da der Stammbaum unendlich weit verzweigt werden kann. Wir wollen aber nicht für jede Generation eine neue Tabelle nutzen. Aus diesem Grund verwenden wir eine einzige Tabelle. Das Stichwort, um den Stammbaum umzusetzen, lautet Rekursion. 
+Als große Übung der Class "Einstieg in Laravel 7" hast du einen Familienstammbaum mit Laravel umgesetzt. In diesem Verzeichnis findest du den gesamten Code meiner Musterlösung. Ein Stammbaum stellt eine Schwierigkeit dar, da der Stammbaum unendlich weit verzweigt werden kann. Wir wollen aber nicht für jede Generation eine neue Tabelle nutzen. Aus diesem Grund verwenden wir eine einzige Tabelle. Das Stichwort, um den Stammbaum umzusetzen, lautet Rekursion. 
 
 Die Basis des Stammbaums bist du. Danach kommen deine Eltern und danach deren Eltern – deine Großeltern. Ich beschränke meine Musterlösung nur auf die Eltern, nicht auf irgendwelche Geschwister, Onkel, Tanten etc. Diese kannst du bei Bedarf gerne selbst hinzufügen. Für jede Person im Stammbaum gibt es weitere Vorgaben. Es muss ein Name, Geburtsdatum und Geschlecht angegeben werden. Optional soll das Todesdatum angegeben werden. Es soll das derzeitige Alter der Person, also die Differenz aus dem heutigen Datum und dem Geburtsdatum errechnet werden. Ist die Person bereits verstorben, soll das erreichte Alter aus dem Geburts und Todesdatum errechnet werden. 
 
