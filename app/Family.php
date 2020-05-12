@@ -11,16 +11,16 @@ class Family extends Model
 
     protected $dates = ['birth', 'death'];
 
-
-
     public function child()
     {
         return $this->hasMany('App\Family', 'parent');
     }
+
     public function childRecursive()
     {
         return $this->child()->with('childRecursive')->withChildCount();
     }
+
     public function scopeWithChildCount($query)
     {
         return $query->withCount('child');
