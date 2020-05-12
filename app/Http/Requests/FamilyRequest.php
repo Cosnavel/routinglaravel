@@ -11,7 +11,6 @@ class FamilyRequest extends FormRequest
      *
      * @return bool
      */
-
     public function authorize()
     {
         return true;
@@ -29,7 +28,7 @@ class FamilyRequest extends FormRequest
             'name' => 'required',
             'birth' => 'required',
             'death' => 'nullable|sometimes|after:birth',
-            'gender' => 'required'
+            'gender' => 'required',
         ];
     }
 }
