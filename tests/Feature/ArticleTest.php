@@ -18,7 +18,6 @@ class ArticleTest extends TestCase
      * @return void
      */
 
-
     /** @test */
     public function it_has_a_title_and_text()
     {
@@ -28,6 +27,7 @@ class ArticleTest extends TestCase
 
         $this->assertEquals('great', $article->text);
     }
+
     /** @test */
     public function an_article_can_append_to_a_interest()
     {
@@ -36,6 +36,6 @@ class ArticleTest extends TestCase
         $article = Article::create(['title' => 'foo', 'text' => 'bar']);
         $article->interests()->attach($interest->id);
 
-        $this->assertTrue(!!$article->interests()->whereId($interest->id));
+        $this->assertTrue((bool) $article->interests()->whereId($interest->id));
     }
 }
