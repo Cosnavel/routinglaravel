@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Family;
-use Illuminate\Http\Request;
 use App\Http\Requests\FamilyRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class FamilyController extends Controller
@@ -21,7 +21,6 @@ class FamilyController extends Controller
         return view('tree.index', compact('item'));
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -34,7 +33,6 @@ class FamilyController extends Controller
 
         return redirect('/')->withStatus(__('erfolgreich hinzugefügt'));
     }
-
 
     public function parent(FamilyRequest $request, Family $item)
     {
