@@ -4,6 +4,7 @@
     </p>
 <p align="center">
 <a href="https://www.codefactor.io/repository/github/cosnavel/routinglaravel"><img src="https://www.codefactor.io/repository/github/cosnavel/routinglaravel/badge" alt="CodeFactor" /></a>
+    <a href="https://github.styleci.io/repos/236512615"><img src="https://github.styleci.io/repos/236512615/shield?branch=master" alt="StyleCI"></a>
 </p>
 <p align="center">
 Übung Familienstammbaum - Class "Einstieg in Laravel 7"
