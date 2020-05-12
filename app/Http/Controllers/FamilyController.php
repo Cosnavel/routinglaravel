@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Family;
 use App\Http\Requests\FamilyRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class FamilyController extends Controller
 {
