@@ -11,7 +11,7 @@ class Family extends Model
 
     protected $dates = ['birth', 'death'];
 
-    public function child()
+    public function child(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Family', 'parent');
     }
