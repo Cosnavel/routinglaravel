@@ -29,13 +29,13 @@ class FamilyController extends Controller
     {
         Family::create($request->all());
 
-        return redirect('/')->withStatus(__('erfolgreich hinzugefügt'));
+        return redirect()->to('/')->withStatus(__('erfolgreich hinzugefügt'));
     }
 
     public function parent(FamilyRequest $request, Family $item)
     {
         $item->child()->create($request->all());
 
-        return redirect('/')->withStatus(__('erfolgreich hinzugefügt'));
+        return redirect()->to('/')->withStatus(__('erfolgreich hinzugefügt'));
     }
 }
