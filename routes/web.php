@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\FamilyController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,5 +14,5 @@
 |
 */
 
-Route::put('/parent/{item}', 'FamilyController@parent')->name('parent');
-Route::resource('/', 'FamilyController');
+Route::put('/parent/{item}', [FamilyController::class, 'parent'])->name('parent');
+Route::resource('/', FamilyController::class);

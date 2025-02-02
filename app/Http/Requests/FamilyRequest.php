@@ -25,10 +25,20 @@ class FamilyRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required',
-            'birth' => 'required',
-            'death' => 'nullable|sometimes|after:birth',
-            'gender' => 'required',
+            'name' => [
+                'required',
+            ],
+            'birth' => [
+                'required',
+            ],
+            'death' => [
+                'nullable',
+                'sometimes',
+                'after:birth',
+            ],
+            'gender' => [
+                'required',
+            ],
         ];
     }
 }
